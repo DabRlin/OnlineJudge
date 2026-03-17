@@ -1,0 +1,22 @@
+/**
+ * 竞赛列表页面样式
+ */
+
+.contests-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.contests-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.contests-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}

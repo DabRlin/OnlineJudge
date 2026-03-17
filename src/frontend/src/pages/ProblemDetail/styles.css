@@ -1,0 +1,51 @@
+/**
+ * 题目详情页样式
+ */
+
+/* 隐藏滚动条但保留滚动功能 */
+.problem-description-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.problem-description-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* 题目标题样式 */
+.problem-title {
+  color: #262626;
+  font-weight: 600;
+}
+
+/* 题目详情页背景 */
+.problem-detail-container {
+  background-color: #f5f5f5;
+}
+
+/* 左侧题目描述区域 */
+.problem-left-panel {
+  background-color: #ffffff;
+  border-right: 1px solid #e8e8e8;
+}
+
+/* 右侧代码编辑区域 */
+.problem-right-panel {
+  background-color: #ffffff;
+}
+
+/* Tabs 圆角设计 */
+.problem-tabs .ant-tabs-nav {
+  border-radius: 8px 8px 0 0;
+}
+
+/* 描述信息卡片圆角 */
+.problem-descriptions {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 样例输入输出圆角 */
+.sample-box {
+  border-radius: 6px;
+}

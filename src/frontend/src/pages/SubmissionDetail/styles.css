@@ -1,0 +1,46 @@
+/**
+ * 提交详情页面样式
+ */
+
+.submission-detail-page {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.submission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.submission-info-card h2 {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.error-message {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.error-message pre {
+  margin: 0;
+  color: #cf1322;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.code-display {
+  margin-top: 16px;
+}

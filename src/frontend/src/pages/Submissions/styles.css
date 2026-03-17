@@ -1,0 +1,22 @@
+/**
+ * 提交记录页面样式
+ */
+
+.submissions-page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.submissions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.submissions-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
