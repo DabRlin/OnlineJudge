@@ -2,22 +2,20 @@
 提交记录 API 路由
 """
 
-import asyncio
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.deps import get_db, get_current_user
 from app.models.user import User, UserRole
-from app.models.submission import Submission
+from app.models.problem import Problem
 from app.services.submission_service import SubmissionService
 from app.services.docker_judge_service import DockerJudgeService
 from app.schemas.submission import (
     SubmissionCreate,
     SubmissionResponse,
-    SubmissionDetail,
     SubmissionListParams,
-    SubmissionListItem,
 )
 from app.schemas.response import Response
 
@@ -46,7 +44,7 @@ async def submit_code(
     
     # 提交到 Celery 判题队列
     judge_service = DockerJudgeService(db)
-    task_id = await judge_service.submit_judge_task(submission.id)
+    await judge_service.submit_judge_task(submission.id)
     
     return Response(
         data=submission,
@@ -83,19 +81,12 @@ async def get_submissions(
     
     submissions, total = await service.get_submissions(params)
     
-    # 构建响应数据
-    from sqlalchemy import select
-    from app.models.user import User
-    from app.models.problem import Problem
-    
     items = []
     for submission in submissions:
-        # 获取用户信息
         user_stmt = select(User).where(User.id == submission.user_id)
         user_result = await db.execute(user_stmt)
         user = user_result.scalar_one_or_none()
         
-        # 获取题目信息
         problem_stmt = select(Problem).where(Problem.id == submission.problem_id)
         problem_result = await db.execute(problem_stmt)
         problem = problem_result.scalar_one_or_none()
@@ -152,11 +143,6 @@ async def get_submission(
             detail="无权查看此提交"
         )
     
-    # 获取用户和题目信息
-    from sqlalchemy import select
-    from app.models.user import User
-    from app.models.problem import Problem
-    
     user_stmt = select(User).where(User.id == submission.user_id)
     user_result = await db.execute(user_stmt)
     user = user_result.scalar_one_or_none()
@@ -212,13 +198,9 @@ async def rejudge_submission(
             detail="提交记录不存在"
         )
     
-    # 在后台执行判题
-    async def judge_task():
-        async with AsyncSession(db.bind) as judge_db:
-            judge_service = JudgeService(judge_db)
-            await judge_service.judge_submission(submission.id)
-    
-    background_tasks.add_task(judge_task)
+    # 重新提交到 Celery 判题队列
+    judge_service = DockerJudgeService(db)
+    await judge_service.submit_judge_task(submission.id)
     
     return Response(
         data=submission,

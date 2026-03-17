@@ -61,6 +61,7 @@ export const ProblemDetail: FC = () => {
 
     fetchProblem()
     fetchSubmissions()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, user])
 
   const getDifficultyColor = (diff: Difficulty) => {
@@ -358,7 +359,7 @@ export const ProblemDetail: FC = () => {
                         }
                         fetchSubmissions()
                       }
-                    } catch (_) {}
+                    } catch (_e) { /* polling tick failed, continue */ }
                     if (polls >= MAX_POLLS) {
                       clearInterval(poll)
                       message.destroy('judge')

@@ -50,6 +50,7 @@ export const Problems: FC = () => {
 
   useEffect(() => {
     fetchProblems()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, difficulty, search])
 
   const handleFileSelect = (file: File) => {

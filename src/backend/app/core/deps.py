@@ -1,6 +1,6 @@
 """FastAPI dependencies for dependency injection"""
 
-from typing import Any, AsyncGenerator, Optional
+from typing import Any, Optional
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -125,9 +125,8 @@ async def get_current_active_user(
     Raises:
         HTTPException: If user is inactive
     """
-    # TODO: Check if user is active
-    # if not current_user.is_active:
-    #     raise HTTPException(status_code=400, detail="Inactive user")
+    if not current_user.is_active:
+        raise HTTPException(status_code=400, detail="账号已被禁用")
     return current_user
 
 

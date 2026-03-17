@@ -5,7 +5,7 @@
 import { FC, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card, Table, Tag, Button, Tabs, Space, Input, message } from 'antd'
-import { TrophyOutlined, SearchOutlined, PlusOutlined } from '@ant-design/icons'
+import { TrophyOutlined, PlusOutlined } from '@ant-design/icons'
 import { contestApi } from '@/services/contest'
 import type { ContestListItem, ContestStatus } from '@/types'
 import { useAuthStore } from '@/stores/authStore'
@@ -47,6 +47,7 @@ export const Contests: FC = () => {
 
   useEffect(() => {
     fetchContests()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, activeTab, keyword])
 
   const getStatusColor = (status: ContestStatus): string => {

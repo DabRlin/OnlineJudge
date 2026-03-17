@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import Optional
 from enum import Enum as PyEnum
 
-from sqlalchemy import String, Integer, Text, Enum as SQLEnum, DateTime, ForeignKey, Float
+from sqlalchemy import Integer, Text, Enum as SQLEnum, DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base

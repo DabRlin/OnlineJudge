@@ -5,7 +5,7 @@ from sqlalchemy import select, func, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.models.problem import Problem, TestCase, Difficulty
+from app.models.problem import Problem, TestCase
 from app.schemas.problem import (
     ProblemCreate,
     ProblemUpdate,
@@ -108,8 +108,8 @@ class ProblemService:
         
         # 只显示公开题目
         if only_public:
-            query = query.where(Problem.is_public == True)
-            count_query = count_query.where(Problem.is_public == True)
+            query = query.where(Problem.is_public.is_(True))
+            count_query = count_query.where(Problem.is_public.is_(True))
         
         # 难度筛选
         if query_params.difficulty:
@@ -249,7 +249,7 @@ class ProblemService:
         """
         query = select(TestCase).where(
             TestCase.problem_id == problem_id,
-            TestCase.is_sample == True
+            TestCase.is_sample.is_(True)
         )
         
         result = await self.db.execute(query)

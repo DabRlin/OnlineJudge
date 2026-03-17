@@ -5,9 +5,8 @@
 from datetime import datetime
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy import select, func, or_, and_
+from sqlalchemy import select, func, and_
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from app.core.database import get_db
 from app.core.deps import get_current_user, get_current_admin_user, get_current_user_optional
@@ -42,7 +41,7 @@ async def get_contests(
     """获取竞赛列表"""
     
     # 构建查询
-    query = select(Contest).where(Contest.is_visible == True)
+    query = select(Contest).where(Contest.is_visible.is_(True))
     
     # 状态筛选
     now = datetime.utcnow()

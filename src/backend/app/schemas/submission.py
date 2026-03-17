@@ -3,7 +3,7 @@
 """
 
 from datetime import datetime
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 from pydantic import BaseModel, Field, ConfigDict
 
 from app.models.submission import SubmissionStatus, ProgrammingLanguage

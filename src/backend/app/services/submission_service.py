@@ -7,7 +7,7 @@ from datetime import datetime
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func, and_
 
-from app.models.submission import Submission, SubmissionStatus, ProgrammingLanguage
+from app.models.submission import Submission, SubmissionStatus
 from app.models.problem import Problem
 from app.schemas.submission import (
     SubmissionCreate,

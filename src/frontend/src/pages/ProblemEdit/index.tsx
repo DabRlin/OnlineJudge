@@ -23,7 +23,7 @@ import { ArrowLeftOutlined, PlusOutlined, DeleteOutlined, EditOutlined } from '@
 import MDEditor from '@uiw/react-md-editor'
 import { problemApi } from '@/services/problem'
 import { useAuthStore } from '@/stores/authStore'
-import type { ProblemDetail, Difficulty, TestCase } from '@/types'
+import type { ProblemDetail, TestCase } from '@/types'
 import './styles.css'
 
 const { TabPane } = Tabs
@@ -65,6 +65,7 @@ export const ProblemEdit: FC = () => {
     if (id) {
       fetchProblem()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, user, navigate])
 
   const fetchProblem = async () => {

@@ -17,12 +17,10 @@ import {
   Table,
   Modal,
   message,
-  Divider,
 } from 'antd'
 import { ArrowLeftOutlined, PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
 import { contestApi } from '@/services/contest'
-import { problemApi } from '@/services/problem'
 import type { Contest, ContestProblem } from '@/types'
 import './styles.css'
 
@@ -48,6 +46,7 @@ export const ContestEdit: FC = () => {
       fetchContest()
       fetchProblems()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const fetchContest = async () => {

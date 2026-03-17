@@ -14,7 +14,7 @@ sys.path.insert(0, judger_path)
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from app.models.submission import Submission, SubmissionStatus, ProgrammingLanguage
+from app.models.submission import SubmissionStatus, ProgrammingLanguage
 from app.models.problem import Problem, TestCase
 from app.services.submission_service import SubmissionService
 from app.schemas.submission import SubmissionUpdate
@@ -144,7 +144,7 @@ class DockerJudgeService:
         同步判题（Celery 不可用时的后备方案）
         """
         try:
-            from judger.docker_judger import DockerJudger, JudgeResult
+            from judger.docker_judger import DockerJudger
             from judger.languages import Language
             
             # 更新状态为判题中
